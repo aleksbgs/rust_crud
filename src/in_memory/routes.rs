@@ -8,6 +8,7 @@ use crate::in_memory::state::{AppState, Employed};
 use rand_core::OsRng;
 use axum_auth::AuthBasic;
 
+
 #[derive(Deserialize)]
 struct NewEmployed {
     firstname: String,
@@ -89,7 +90,7 @@ async fn create_employed(State(state):State<AppState>, Json(emp):Json<NewEmploye
 }
 
 
-async fn update_employed(State(state):State<AppState>, Path(id):Path<i32>, Json(employed):Json<NewEmployed>) -> Json<Vec<Employed>> {
+async fn update_employed(State(state):State<AppState>, Path(id):Path<i32>, Json(employed):Json<NewEmployed>) -> Result<Json<String>, (StatusCode,String)> {
     let mut employed_list = state.emp_list.write().expect("rwlock poisoned");
     let mut password_generator = PasswordGenerator::new();
     let password = password_generator.generate();
@@ -103,7 +104,7 @@ async fn update_employed(State(state):State<AppState>, Path(id):Path<i32>, Json(
                 "status": "fail",
                 "message": format!("Error while hashing password: {}", e),
             });
-            (StatusCode::INTERNAL_SERVER_ERROR, Json(error_response))
+            return (StatusCode::INTERNAL_SERVER_ERROR, Json(error_response))
         })
         .map(|hash| hash.to_string());
 
@@ -117,16 +118,16 @@ async fn update_employed(State(state):State<AppState>, Path(id):Path<i32>, Json(
         employed_list[index].password = Option::from(hashed_password.unwrap());
     }
 
-    Json(employed_list.clone())
+    Ok(Json("updated success".to_string()))
 }
-async fn delete_employed(State(state):State<AppState>, Path(id):Path<i32>) ->Json<Vec<Employed>> {
+async fn delete_employed(State(state):State<AppState>, Path(id):Path<i32>) ->Result<Json<Vec<Employed>>, (StatusCode,String)> {
     let mut employed_list = state.emp_list.write().expect("rwlock poisoned");
 
     if let Some(index) = employed_list.iter().position(|e| e.id == id) {
         employed_list.remove(index);
     }
 
-    Json(employed_list.clone())
+    Ok(Json(employed_list.clone()))
 }
 fn is_at_least_18_years_old(age_str: String) -> Result<bool, std::num::ParseIntError> {
     let age = age_str.parse::<i32>()?;
