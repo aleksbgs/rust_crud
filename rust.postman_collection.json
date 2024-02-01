@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "b704110b-f0a9-4bf6-9eb9-8fa7cd2a2478",
+		"name": "rust Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1660671"
+	},
+	"item": [
+		{
+			"name": "Health Route",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/hello",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"hello"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All employed",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "test",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/employed",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update employed per id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"firstname\": \"james\",\n      \"lastname\":\"bond\",\n      \"age\":\"324\",\n      \"diploma\":1,\n      \"onboarded\":false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/employed/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employed",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create employed  ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"firstname\": \"usa\",\n      \"lastname\":\"tramp\",\n      \"age\":\"33\",\n      \"diploma\":1,\n      \"onboarded\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/employed",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete employed  per id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"firstname\": \"usa\",\n      \"lastname\":\"tramp\",\n      \"age\":\"1324\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/employed/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employed",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All offboarded",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/list_users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"list_users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

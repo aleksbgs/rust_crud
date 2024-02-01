@@ -1,0 +1,22 @@
+[package]
+name = "rust"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+axum = "0.7"
+axum-auth = "0.7.0"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1"
+pretty_env_logger = "0.5"
+log = "0.4"
+uuid = { version = "1.6", features = ["v4", "serde"] }
+thiserror = "1"
+argon2 = { version = "0.5", features = ["simple"] }
+rand_core = { version = "0.6", features = ["std"] }
+chrono = { version = "0.4", features = ["serde"] }
+tera = "1.0"
+rand = "0.8"
+
