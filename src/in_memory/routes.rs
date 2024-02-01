@@ -32,7 +32,7 @@ pub fn rest_router() -> Router<AppState> {
 async fn get_employed(AuthBasic((id, password)): AuthBasic, State(state): State<AppState>) -> Result<Json<Vec<Employed>>, (StatusCode,String)>  {
     if let Some(password) = password {
         if password == "" || id == ""{
-            println!("User '{}' with password '{}'", id, password);
+            println!("User '{}' is without empty password or empty id '{}'", id, password);
             return Err((StatusCode::BAD_REQUEST, "User is with empty password or empty id".to_string()))
         }
     } else {
